@@ -1,0 +1,13 @@
+extensions {\\.txt}
+
+syntax {
+	multi-line-comment {^\y \y$}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+}
