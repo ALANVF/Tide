@@ -5,7 +5,7 @@ proc rgb {r g b} {
 	return [format "#%02x%02x%02x" r g b]
 }
 
-set path [file dirname [info script]]
+set path [pwd]
 
 proc ftos name {
 	set cf [open $name r]
