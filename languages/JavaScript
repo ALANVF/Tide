@@ -1,0 +1,143 @@
+extensions {\\.js}
+
+syntax {
+	keywords {
+		Keywords {
+			var let const delete
+			if else
+			function class
+			while do for break continue
+			switch case default
+			return
+			try catch throw
+			with
+			abstract async await enum eval export extends finally from implements import package private protected public static super synchronized throws transient yield
+		}
+		
+		Constants {
+			NaN
+			Infinity
+			true
+			false
+			null
+			undefined
+		}
+		
+		Word-Operators {
+			not
+			in of
+			typeof instanceof
+			new
+			as
+		}
+		
+		Types {
+			Array ArrayBuffer
+			Boolean
+			DataView Dat
+			Error EvalError
+			Float32Array Float64Array Function
+			Generator GeneratorFunction Global
+			Int8Array Int16Array Int32Array InternalError
+			JSON
+			Map Math
+			Number
+			Object
+			Promise Proxy
+			RangeError ReferenceError Reflect RegExp
+			Set String Symbol SyntaxError
+			TypeError
+			Uint8Array Uint8ClampedArray Uint16Array Uint32Array URIError
+			WeakMap WeakSet
+		}
+		
+		Builtin-Functions {
+			apply call concat exec indexOf join lastIndexOf log match max min parse pop push random replace reverse search shift slice sort split substring substr unshift
+		}
+		
+		Builtin-Methods {
+			hasOwnProperty propertyIsEnumerable getOwnPropertyDescriptor defineProperty getPrototypeOf
+			isFinite isNaN isPrototypeOf
+			length name
+			toString parseInt parseFloat
+			valueOf
+			prototype
+		}
+		
+		Globals {
+			window document
+			this
+			arguments
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,?!=<>&|:;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:\.\d+)?\y}
+	}
+	
+	strings {
+		Regex            {/(?!\s+).+?/(?=\.|\,|\)|\]|\}|;|\:|[a-z]+|$$)}
+		Double-Quoted    {".*?"}
+		Single-Quoted    {'.*?'}
+		Template-Literal {`.*?`}
+	}
+	
+	regexes {
+		Object-Attr  {\y(?!case\s+|default\s+)(?:[a-zA-Z_$][a-zA-Z0-9_$]*)(?=\s*\:)}
+	}
+	
+	comments {
+		Comment {//.*}
+	}
+	
+	multi-line-comment {/\\* \\*/}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword2
+		Constants Constant1
+		Word-Operators Operator1
+		Types Constant2
+		Builtin-Functions Function1
+		Builtin-Methods Keyword3
+		Globals Keyword1
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	strings {
+		Regex String3
+		Double-Quoted String1
+		Single-Quoted String1
+		Template-Literal String2
+	}
+	
+	regexes {
+		Object-Attr Function3
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}

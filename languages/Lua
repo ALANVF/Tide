@@ -1,0 +1,123 @@
+extensions {\\.lua}
+
+syntax {
+	keywords {
+		Keywords {
+			local
+			if else elseif end then
+			function
+			while do for break repeat until
+			return
+		}
+		
+		Constants {
+			true false nil
+		}
+		
+		Word-Operators {
+			and or not
+			in
+		}
+		
+		Types {
+			userdata string number table io metatable coroutine
+		}
+		
+		Builtin-Functions {
+			pairs ipairs type call abs sqrt exp log sin cos tan max min random print
+			getmetatable setmetatable rawequal rawget rawset getbinhandler getcomphandler
+			tonumber tostring error
+			assert collectgarbage
+			dofile
+			_G
+			getenv getfenv setfenv
+			loadfile loadstring
+			next
+			pcall
+			rawequal
+			select
+			unpack
+			_VERSION
+			xpcall
+		}
+		
+		Builtin-Methods {
+			read write
+			sub gsub match gmatch find gfind
+			__add __sub __mul __div __mod __pow __unm
+			__concat
+			__eq __lt __le
+			__index __newindex
+			__call
+			__gc
+			__mode
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,?=<>&|:;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:\.\d+)?\y}
+	}
+	
+	strings {
+		Double-Quoted    {".*?"}
+		Single-Quoted    {'.*?'}
+		Special-String   {\[(\=*)\[.*?`\]\1\]}
+	}
+	
+	regexes {
+		Assign-Var  {(?:[a-zA-Z_]\w*)(?=\s*\={1})}
+	}
+	
+	comments {
+		Comment {(?!\]\])\-\-(?!\[\[).*}
+	}
+	
+	multi-line-comment {\\-\\-\\[\\[ \\]\]\\-\\-}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword1
+		Constants Constant1
+		Word-Operators Operator1
+		Types Constant2
+		Builtin-Functions Function1
+		Builtin-Methods Keyword3
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	strings {
+		Double-Quoted String1
+		Single-Quoted String1
+		Special-String String1
+	}
+	
+	regexes {
+		Assign-Var Keyword2
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}

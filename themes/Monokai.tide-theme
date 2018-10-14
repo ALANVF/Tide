@@ -1,0 +1,28 @@
+DefaultText       #f8f8f2
+DefaultBackground #282828
+DefaultCursor     #f8f8f0
+
+Keyword1   #f92672
+Keyword2   #66d9ef
+Keyword3   #a6e22e
+Keyword4   #FD971F
+
+Constant1  #ae81ff
+Constant2  #66d6ef
+
+Function1  #66d6ef
+Function2  #66d6ef
+Function3  #a6e22e
+
+Operator1  #f92672
+Operator2  #f8f8f2
+Operator3  #f8f8f2
+
+Number1    #ae81ff
+
+String1    #e6db74
+String2    #e6db74
+String3    #e6db74
+
+Comment1   #75715e
+Comment2   #75715e

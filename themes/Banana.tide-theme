@@ -1,0 +1,28 @@
+DefaultText       black
+DefaultBackground white
+DefaultCursor     red
+
+Keyword1   goldenrod
+Keyword2   blue
+Keyword3   maroon2
+Keyword4   blue4
+
+Constant1  {dark cyan}
+Constant2  {cornflower blue}
+
+Function1  chartreuse4
+Function2  {light sea green}
+Function3  {light blue4}
+
+Operator1  purple2
+Operator2  grey25
+Operator3  grey45
+
+Number1    firebrick1
+
+String1    {lime green}
+String2    green3
+String3    {orange red3}
+
+Comment1   {dim grey}
+Comment2   {slate grey}
