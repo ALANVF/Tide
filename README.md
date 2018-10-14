@@ -6,7 +6,6 @@
 - Added a Ruby lexer.
 - Added keyboard shortcuts.
 - Choosing a theme/lexer without having loaded a file works now.
-- 
 
 ## Current Features:
 - Lexers for C, JavaScript, Ruby, JSON, Lua, Talk (my programming language), Text, and Tcl.
