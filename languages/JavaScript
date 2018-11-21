@@ -1,4 +1,4 @@
-extensions {\\.js}
+extensions {.js}
 
 syntax {
 	keywords {
@@ -106,7 +106,7 @@ colors {
 	}
 	
 	keywords {
-		Keywords Keyword2
+		Keywords Keyword1
 		Constants Constant1
 		Word-Operators Operator1
 		Types Constant2

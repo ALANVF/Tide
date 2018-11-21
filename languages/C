@@ -1,4 +1,4 @@
-extensions {\\.c \\.h}
+extensions {.c .h}
 
 syntax {
 	keywords {
@@ -117,3 +117,4 @@ colors {
 	
 	multi-line-comment Comment1
 }
+

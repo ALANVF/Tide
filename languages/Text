@@ -1,4 +1,4 @@
-extensions {\\.txt}
+extensions {.txt}
 
 syntax {
 	multi-line-comment {^\y \y$}

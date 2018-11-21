@@ -1,0 +1,113 @@
+extensions {.java}
+
+syntax {
+	keywords {
+		Keywords {
+			abstract assert
+			break
+			case catch class const continue
+			default do
+			else enum extends
+			final finally for
+			goto
+			if implements import instanceof interface
+			native new
+			package private protected public
+			return
+			static strictfp super switch synchronized
+			throw throws transient try volatile while
+		}
+		
+		Constants {
+			true false null
+			undefined
+		}
+		
+		Types {
+			void
+			boolean
+			int float double byte
+			char String
+			long short
+			array
+		}
+		
+		Builtin-Types {
+			System
+			ArrayList List Collections Iterator Map
+		}
+		
+		Builtin-Methods {
+			println
+		}
+		
+		Globals {
+			this
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,?!=&|:;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:L|\.\d+[df]?)?\y}
+	}
+	
+	strings {
+		Double-Quoted    {".*?"}
+		Single-Char      {'.'}
+	}
+	
+	regexes {
+		Annotation {\@\w+}
+	}
+	
+	comments {
+		Comment {//.*}
+	}
+	
+	multi-line-comment {/\\* \\*/}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword1
+		Constants Constant2
+		Types Constant1
+		Builtin-Types Function1
+		Builtin-Methods Keyword3
+		Globals Keyword1
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	strings {
+		Double-Quoted String1
+		Single-Char   String2
+	}
+	
+	regexes {
+		Annotation Keyword4
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}

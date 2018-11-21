@@ -1,4 +1,4 @@
-extensions {\\.lua}
+extensions {.lua}
 
 syntax {
 	keywords {
@@ -66,7 +66,7 @@ syntax {
 	strings {
 		Double-Quoted    {".*?"}
 		Single-Quoted    {'.*?'}
-		Special-String   {\[(\=*)\[.*?`\]\1\]}
+		Special-String   {(?nspw)\[(\=*)\[.*?\](\1)\](?!\-\-)}
 	}
 	
 	regexes {
@@ -110,7 +110,6 @@ colors {
 		Single-Quoted String1
 		Special-String String1
 	}
-	
 	regexes {
 		Assign-Var Keyword2
 	}
@@ -121,3 +120,14 @@ colors {
 	
 	multi-line-comment Comment1
 }
+
+
+
+
+
+
+
+
+
+
+

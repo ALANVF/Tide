@@ -21,7 +21,6 @@ proc ftod name {
 	return [regsub -all {\n} $d { }]
 }
 
-
 if {[ftos "$::path/config.tide-config"] eq ""} {
 	set newConfig [open "$::path/config.tide-config" w]
 	puts -nonewline $newConfig [ftos "$::path/CONFIG-BACKUP"]
@@ -46,13 +45,8 @@ proc get {args} {
 	]
 }
 
-##console show
-##puts [dict get [dict get [dict get [dict get $c language] syntax] keywords] Keywords]
-##puts [lindex [lindex [get keywords Keywords] 0] 2]
-
-
 proc Multiline-comment {win color cmt} {
-	if {[catch {$win tag cget multi-line-comment -foreground}]} {return}
+	if {[catch {$win tag cget _cComment -foreground}]} {return}
 	#puts "[lindex $cmt 1]"
 	set startIndex 1.0
 	set commentRE "\\\\\\\\|\\\"|\\\\\"|\\\\'|'|[lindex $cmt 0]|[lindex $cmt 1]"
@@ -61,7 +55,7 @@ proc Multiline-comment {win color cmt} {
 	set isQuote 0
 	set isSingleQuote 0
 	set isComment 0
-	$win tag remove multi-line-comment 1.0 end
+	$win tag remove _cComment 1.0 end
 	
 	while 1 {
 		set index [$win search -count length -regexp $commentRE $startIndex end]
@@ -75,18 +69,19 @@ proc Multiline-comment {win color cmt} {
 		} elseif {$str eq "\\'"} {continue
 		} elseif {$str eq "\"" && $isComment == 0 && $isSingleQuote == 0} {if {$isQuote} {set isQuote 0} else {set isQuote 1}
 		} elseif {$str eq "'" && $isComment == 0 && $isQuote == 0} {if {$isSingleQuote} {set isSingleQuote 0} else {set isSingleQuote 1}
-		} elseif {$str eq [lindex $cmt 0] && $isQuote == 0 && $isSingleQuote == 0} {if {$isComment} {break} else {set isComment 1; set commentStart $index}
-		} elseif {$str eq [lindex $cmt 1] && $isQuote == 0 && $isSingleQuote == 0} {if {$isComment} {set isComment 0; $win tag add multi-line-comment $commentStart $endIndex; $win tag raise multi-line-comment} else {break}
+		} elseif {[expr [string equal $str [lindex $cmt 0]] || [string equal $str "[lindex $cmt 0]"]] && $isQuote == 0 && $isSingleQuote == 0} {if {$isComment} {break} else {set isComment 1; set commentStart $index}
+		} elseif {[expr [string equal $str [lindex $cmt 1]] || [string equal $str "[lindex $cmt 1]"]] && $isQuote == 0 && $isSingleQuote == 0} {if {$isComment} {set isComment 0; $win tag add _cComment $commentStart $endIndex; $win tag raise multi-line-comment} else {break}
 		}
 	}
 	
-	$win tag configure multi-line-comment -foreground $color
+	$win tag configure _cComment -foreground $color
 }
 
 #######
 
 proc ctext::enableComments {win color} {
 	$win tag configure _cComment -foreground $color
+	#$win tag configure multi-line-comment -foreground $color
 }
 
 proc ctext::comments {win {afterTriggered 0}} {
@@ -137,7 +132,7 @@ proc ctext::comments {win {afterTriggered 0}} {
 		} else {
 		set isSingleQuote 1
 		}
-	} elseif {$str eq [subst $bc] && $isQuote == 0 && $isSingleQuote == 0} {
+	} elseif {[expr {$str eq [subst $bc]} || {$str eq $bc}] && $isQuote == 0 && $isSingleQuote == 0} {
 		if {$isComment} {
 		#comment in comment
 		break
@@ -145,7 +140,7 @@ proc ctext::comments {win {afterTriggered 0}} {
 		set isComment 1
 		set commentStart $index
 		}
-	} elseif {$str eq [subst $ec] && $isQuote == 0 && $isSingleQuote == 0} {
+	} elseif {[expr {$str eq [subst $ec]} || {$str eq $ec}] && $isQuote == 0 && $isSingleQuote == 0} {
 		if {$isComment} {
 		set isComment 0
 		$win tag add _cComment $commentStart $endIndex
@@ -281,9 +276,20 @@ proc highlightCurrent win {
 	}
 }
 
-set ::fileName Untitled
+proc getLine {} {
+	return [regexp -inline -- {\d+(?=\.\d+)} [.f.t index "insert linestart"]]
+}
 
-console show
+set ::fileName Untitled
+set ::fileTypes {{"All Files" *}}
+
+foreach i [glob -directory $::path/languages *] {
+	lappend ::fileTypes "\"[file tail $i] Files\" \{[dict get [ftod $i] extensions]\}"
+}
+
+#console show
+
+wm title . "Tide - Untitled"
 
 proc main {} {
 	menu .toolbar
@@ -292,19 +298,12 @@ proc main {} {
 	.toolbar add cascade -menu [menu .toolbar._file -tearoff 0]    -label File
 		.toolbar._file add command -label "New File"     -command {}
 		.toolbar._file add command -label "Open File"    -command {
-			set _fileName [tk_getOpenFile -filetypes {
-				{"All Files"          *}
-				{"Text Files"      .txt}
-				{"JavaScript Files" .js}
-				{"Talk Files"       .sm}
-				{"C Files"      {.c .h}}
-				{"Tcl Files"       .tcl}
-				{"JSON Files"     .json}
-				{"Lua Files"       .lua}
-			}]
-	
+			set _fileName [tk_getOpenFile -filetypes $::fileTypes]
+			
 			if {$_fileName ne ""} {
 				set ::fileName $_fileName
+				
+				wm title . "Tide - $_fileName"
 				
 				.f.t fastdelete 1.0 end
 				readFile .f.t $_fileName
@@ -313,36 +312,33 @@ proc main {} {
 		}
 		.toolbar._file add command -label "Save File       (Ctrl+S)"    -command {
 			saveFile .f.t
+			
+			wm title . "Tide - $_fileName"
 		}
 		.toolbar._file add command -label "Save File As  (Ctrl+S)" -command {
-			set _newFile [tk_getSaveFile -filetypes {
-				{"All Files"          *}
-				{"Text Files"      .txt}
-				{"JavaScript Files" .js}
-				{"Talk Files"       .sm}
-				{"C Files"      {.c .h}}
-				{"Tcl Files"       .tcl}
-				{"JSON Files"     .json}
-				{"Lua Files"       .lua}
-			}]
+			set _newFile [tk_getSaveFile -filetypes $::fileTypes]
 			
 			if {$_newFile ne ""} {
 				set ::fileName $_newFile
 				saveFile .f.t
+				
+				wm title . "Tide - $_newFile"
 			}
 		}
 		.toolbar._file add command -label "Close File"   -command {
 			set ::fileName Untitled
 			.f.t fastdelete 1.0 end
+			
+			wm title . "Tide - Untitled"
 		}
 		.toolbar._file add command -label "Exit"         -command {exit}
 	
 	.toolbar add cascade -menu [menu .toolbar._edit -tearoff 0]    -label Edit
-		.toolbar._edit add command -label "Undo  (Ctrl+Z)"  -command {.f.t edit undo}
-		.toolbar._edit add command -label "Redo   (Ctrl+Y)"  -command {.f.t edit redo}
+		.toolbar._edit add command -label "Undo  (Ctrl+Z)"     -command {.f.t edit undo}
+		.toolbar._edit add command -label "Redo   (Ctrl+Y)"    -command {.f.t edit redo}
 		.toolbar._edit add command -label "Cut     (Ctrl+X)"   -command {.f.t cut}
-		.toolbar._edit add command -label "Copy  (Ctrl+C)"  -command {.f.t copy}
-		.toolbar._edit add command -label "Paste  (Ctrl+V)" -command {.f.t paste}
+		.toolbar._edit add command -label "Copy  (Ctrl+C)"     -command {.f.t copy}
+		.toolbar._edit add command -label "Paste  (Ctrl+V)"    -command {.f.t paste}
 	
 	.toolbar add cascade -menu [menu .toolbar._view -tearoff 0]    -label View
 	.toolbar add cascade -menu [menu .toolbar._search -tearoff 0]  -label Search
@@ -365,7 +361,7 @@ proc main {} {
 					if {\[string compare \$::fileName Untitled\] != 0} {
 						set _tempText \[.f.t get 1.0 end\]
 						.f.t fastdelete 1.0 end
-						readFile .f.t $::fileName
+						readFile .f.t \$::fileName
 					}
 					highlightCurrent .f.t
 					
@@ -398,7 +394,7 @@ proc main {} {
 					if {\[string compare \$::fileName Untitled\] != 0} {
 						set _tempText \[.f.t get 1.0 end\]
 						.f.t fastdelete 1.0 end
-						readFile .f.t $::fileName
+						readFile .f.t \$::fileName
 					}
 					highlightCurrent .f.t
 					
@@ -572,16 +568,7 @@ proc main {} {
 	bind .f.t <Control-s>  {
 		#puts $::fileName
 		if {$::fileName eq "Untitled"} {
-			set _newFile [tk_getSaveFile -filetypes {
-				{"All Files"          *}
-				{"Text Files"      .txt}
-				{"JavaScript Files" .js}
-				{"Talk Files"       .sm}
-				{"C Files"      {.c .h}}
-				{"Tcl Files"       .tcl}
-				{"JSON Files"     .json}
-				{"Lua Files"       .lua}
-			}]
+			set _newFile [tk_getSaveFile -filetypes $::fileTypes]
 			
 			if {$_newFile ne ""} {
 				set ::fileName $_newFile
@@ -590,15 +577,33 @@ proc main {} {
 		} else {
 			saveFile .f.t
 		}
+		
+		wm title . "Tide - $::fileName"
 	}
 	
-	if 0 {
-	bind . <Key-F5> {
-		console show
-		
-		puts [.f.t get 1.0 end]
+	bind .f.t <<Modified>> {
+		wm title . "Tide - *$::fileName"
 	}
+	
+	bind .f.t <KeyRelease-Return> {
+		set l [getLine]
+		set ln [regexp -inline\
+					{^(\t*).*?([\(\[\{]?)\s*$}\
+					[.f.t get [expr $l - 1].0 [expr $l - 1].end]\
+				]
+		
+		if {[lindex $ln 2] ne ""} {
+			.f.t fastinsert $l.end \t[lindex $ln 1]
+		} else {
+			.f.t fastinsert $l.end [lindex $ln 1]
+		}
 	}
 }
 
 main
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+extensions {.cpp .hpp .cxx .hxx .cc}
+
+syntax {
+	keywords {
+		Keywords {
+			_Pragma and and_eq bitand bitor break case catch class compl continue default delete do else enum for goto if new noexcept not not_eq operator or or_eq return struct switch throw try union while xor xor_eq
+		}
+		
+		Keywords2 {
+			__declspec __restrict __restrict__ alignas alignof const const_cast constexpr decltype dynamic_cast explicit export extern friend inline mutable namespace nullptr private private: protected protected: public public: register reinterpret_cast restrict static static_assert static_cast template thread_local typedef typename using virtual volatile
+		}
+		
+		Constants {
+			true false NULL TRUE FALSE
+		}
+		
+		Types {
+			__asm__ _Bool _Complex _Imaginary
+			auto
+			bool
+			char char16_t char32_t
+			double
+			float
+			int
+			long
+			nullptr_t
+			short signed string
+			uint16_t uint32_t unsigned
+			vector void
+			wchar_t
+		}
+		
+		Builtin-Functions {
+			puts gets getc
+			printf sprintf scanf sscanf
+			sizeof typeof typeid
+			free malloc alloc realloc
+		}
+		
+		Globals {
+			this
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.&|}
+		Symbols {!=<>,;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:\.\d+)?\y}
+	}
+	
+	strings {
+		Double-Quoted    {(?!\\)".*?"}
+		Single-Quoted    {'.'}
+	}
+	
+	regexes {
+		Macro {^\s*#\s*(?:define|undef|include|exclude|import|pragma|ifdef|ifndef|if|elseif|else|endif).*?}
+	}
+	
+	comments {
+		Comment {//.*}
+	}
+	
+	multi-line-comment {/\\* \\*/}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword1
+		Keywords2 Function3
+		Constants Constant2
+		Types Constant1
+		Builtin-Functions Function1
+		Globals Keyword1
+	}
+	
+	symbols {
+		Operators Operator1
+		Symbols Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	strings {
+		Double-Quoted String1
+		Single-Quoted String1
+	}
+	
+	regexes {
+		Macro Keyword4
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}
+
+
+
+
+
+

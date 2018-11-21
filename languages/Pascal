@@ -1,0 +1,97 @@
+extensions {.pas}
+
+syntax {
+	regexes {
+		Keywords {(?i)\m(?:
+			program|library|unit|uses|interface|implementation|initialization|finalization|
+			import|exports|export|external|file|
+			begin|end|
+			var|const|type|
+			function|procedure|overload|cdecl|operator|inline|generic|
+			constructor|destructor|override|abstract|virtual|public|private|protected|property|
+			if|then|else|until|case|
+			while|do|for|repeat|
+			break|continue|
+			try|except|finally|raise|
+			with|goto|packed|asm
+		)\M}
+		
+		Constants {(?i)\m(?:
+			true|false|nil
+		)\M}
+		
+		Types {(?i)\m(?:
+			char|string|word|longword|
+			integer|real|shortint|longint|int64|cardinal|byte|
+			boolean|
+			pointer|variant|label|
+			array|set|record|object|class
+		)\M}
+		
+		Word-Operators {(?i)\m(?:
+			is|not|and_then|and|or_else|or|xor|shr|shl|otherwise|
+			div|mod|
+			to|of|downto|in|contains|as
+		)\M}
+		
+		Builtin-Functions {(?i)\m(?:
+			readln|read|writeln|write|
+			chr|ord|succ|pred|
+			abs|round|trunc|sqr|sqrt|arctan|cos|sin|exp|ln|odd|eof|eoln|pow
+		)\M}
+		
+		Special-Keywords {(?i)\m(?:
+			self|varargs
+		)\M}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,=<>&|;:}
+		Wrappers  {()[]}
+	}
+	
+	numbers {
+		Number {\y\d+(?:\.\d+)?\y}
+	}
+	
+	strings {
+		Single-Quoted {(?s)'.*?'}
+		Preprocessor {^\s*\{\$.+\}\s*$}
+	}
+	
+	multi-line-comment {\\{ \\}}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	regexes {
+		Keywords Keyword2
+		Constants Constant2
+		Types Constant1
+		Word-Operators Operator1
+		Builtin-Functions Function1
+		Special-Keywords Keyword3
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	strings {
+		Single-Quoted String1
+		Preprocessor String3
+	}
+	
+	multi-line-comment Comment1
+}
+

@@ -1,4 +1,4 @@
-extensions {\\.sm}
+extensions {.sm}
 
 syntax {
 	keywords {

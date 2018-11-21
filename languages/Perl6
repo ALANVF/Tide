@@ -1,0 +1,141 @@
+extensions {.p6 .pl6 .pm6}
+
+syntax {
+	keywords {
+		Keywords {
+			return
+			my our has anon state augment supersede temp let constant
+			for while until do repeat loop if unless elsif else with with without orwith given when default next last redo proceed succeed gather take contend maybe defer exit make continue break goto leave async lift try
+			macro sub submethod method multi proto only rule token regex category module class role package enum grammar slang subset
+			use need require
+			
+		}
+		
+		Constants {
+			now pi rand tau time
+			True False Nil NaN Inf
+			prec irs ofs ors export deep binary unary reparsed rw parsed cached readonly defequiv will ref copy inline tighter looser equiv assoc required
+			BEGIN CHECK INIT START FIRST ENTER LEAVE KEEP UNDO NEXT LAST PRE POST END CATCH CONTROL TEMP
+		}
+		
+		Types {
+			Any Array Associative AST atomicint Attribute
+			Backtrace Bag Baggy BagHash Blob Block Bool Buf
+			Callable CallFrame Cancellation Capture Channel Code compiler Complex ComplexStr Cool CurrentThreadScheduler Cursor
+			Date Dateish DateTime Distro Duration
+			Encoding Enumeration Exception
+			Failure FatRat
+			Grammar
+			Hash HyperWhatever
+			Int IntStr IO Iterable Iterator
+			Junction
+			Kernel
+			Label List Lock
+			Macro Map Metamodel Method Mix MixHash Mixy Mu
+			NFC NFD NFKC NFKD Nil Num Numeric NumStr
+			ObjAt Order
+			Pair Parameter Perl Pod Positional PositionalBindFailover PredictiveIterator Proc Promise Proxy PseudoStash
+			QuaintHash
+			Range Rat Rational RatStr Real Regex Routine
+			Scalar Scheduler Semaphore Seq Set SetHash Setty Signature Slip Stash Str StrDistance Stringy Sub Submethod Supplier Supply Systemic
+			Tap Telemetry Thread ThreadPoolScheduler
+			Uint Uni utf8 ValueObjAt Variable Version VM
+			Whatever WhateverCode WrapHandle
+			
+			int uint num str void
+			int8 int16 int32 int64 byte uint8 uint16 uint32 uint64 num32 num64
+		}
+		
+		Word-Operators {
+			is as trusts of returns handles where
+			after and before but cmp div does eq eqv ff fff gcd ge gt i lcm le leg lt max min minmax mod ne not notandthen or orelse so unicmp x xor xx
+		}
+		
+		Builtin-Functions {
+			EVALFILE GENERATE MAIN T USAGE abs acos acosec acosech acosh acotan acotanh asec asech asin asinh atan atan2 atanh atomic await bag callframe callsame callwith can cas categorize ceiling cglobal chars chdir chmod chomp chop chr chrs cis codes comb combinations cos cosec cosech cosh cotan cotanh cross defined die dies dir done elems end exp explicitly expmod fc first flat flip floor full gist grep index indir isa isnt item join keys kv lastcall lc like lines log log10 map mix mkdir nativecast nativesizeof nextcallee nextsame nextwith nok ok open ord ords pack pairs periods permutations pick plan pop print produce prompt push put reduce repeated report reverse rindex rmdir roll roots rotate round roundrobin run samecase samemark samewith say sec sech set shell shift signal sin sinh sleep slip slurp snap snapper sort splice split sprintf spurt sqrt squish srand subbuf substr sum tan tanh tc tclc trim truncate uc unimatch uniname uninames uniparse uniprop uniprops unique unival unlike unshift val values warn wordcase words zip
+			WHERE WHEREFORE WHICH WHY WRITE
+			ADD_MORE_METHODS
+		}
+		
+		Special-Keywords {
+			new self
+			prefix postfix infix circumfix postcircumfix ternary term trait_mod
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,=<>&|?!:;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:\.\d+)?\y}
+	}
+	
+	regexes {
+		Adverb            {\s\:\!?(?:\w+(?:\-[a-zA-Z_]\w*)*)}
+		
+		Double-Quoted     {(?s)".*?"}
+		
+		Special-Variable  {(?:\$[_/\!]|[\@\%\&]_)(?=\y)}
+		Scalar-Variable   {\$[\.\!\*\^\=\?\~\:]?(?:[a-zA-Z_]\w*(?:[\-'][a-zA-Z_]\w*)*)}
+		Array-Variable    {\@[\.\!\*\^\=\?\~\:]?(?:[a-zA-Z_]\w*(?:[\-'][a-zA-Z_]\w*)*)}
+		Hash-Variable     {\%[\.\!\*\^\=\?\~\:]?(?:[a-zA-Z_]\w*(?:[\-'][a-zA-Z_]\w*)*)}
+		Function-Variable {\&[\.\!\*\^\=\?\~\:]?(?:[a-zA-Z_]\w*(?:[\-'][a-zA-Z_]\w*)*)}
+		Pointer-Variable  {\\(?:[a-zA-Z_]\w*(?:[\-'][a-zA-Z_]\w*)*)}
+		
+		Single-Quoted     {(?s)(?!\w)'.*?'(?!\w)}
+		Regex-Normal      {(?:(?:m|s|rx)(?:\:[gmirs])*)?/(?!\s+).+?/\s*(?=\.|\,|\)|\]|\}|\{|;|\:|$$)}
+	}
+	
+	comments {
+		Comment {(?=\n|\r|^|^^|;|,|\)|\]|\))\s*#.*}
+	}
+	
+	multi-line-comment {\\=begin \\=end}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword1
+		Constants Constant1
+		Types Constant2
+		Word-Operators Operator1
+		Builtin-Functions Function1
+		Special-Keywords Keyword3
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	regexes {
+		Adverb Keyword4
+		Double-Quoted String1
+		Special-Variable Keyword3
+		Scalar-Variable Keyword2
+		Array-Variable Keyword2
+		Hash-Variable Keyword2
+		Function-Variable Keyword2
+		Pointer-Variable Keyword2
+		Single-Quoted String1
+		Regex-Normal String3
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}

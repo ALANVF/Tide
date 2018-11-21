@@ -1,0 +1,137 @@
+extensions {.scala .sbt}
+
+syntax {
+	keywords {
+		Keywords {
+			abstract
+			case catch class
+			def do
+			else eq extends
+			final finally for forSome
+			if implicit import
+			lazy
+			macro match
+			new
+			object override
+			package private protected
+			return
+			sealed super
+			throw trait try type
+			val var
+			while with
+			yield
+		}
+		
+		Constants {
+			true false null
+		}
+		
+		Types {
+			AnyVal AnyRef Any App Array ArrayBuffer ArrayStack
+			BitSeq Boolean Buffer Byte
+			Char
+			Double Dynamic
+			Float Function Function1 Function2 Function3 Function4 Function5 Function6
+			HashMap HashSet
+			IndexedSet Int Iterable
+			LinearSeq List ListBuffer ListMap Long
+			Map MutableList
+			Nil Nothing None Null
+			Object Option
+			Pair
+			Queue
+			ScalaObject Seq Set Short Some SortedMap SortedSet Stack String
+			Transversable Tuple Tuple2 Tuple3
+			Unit
+			Vector
+		}
+		
+		Builtin-Functions {
+			print println printf
+			readLine readBoolean readByte readShort readChar readInt readLong readFloat readDouble readf
+		}
+		
+		Builtin-Methods {
+			equals hashCode toString apply classOf isInstanceOf asInstanceOf
+			foreach map filter to
+			insert remove empty update length clone ofDim iterate range fill
+			contains get
+			key value
+			charAt compareTo compareToIgnoreCase concat contentEquals copyValueOf endsWith equalsIgnoreCase getBytes getChars indexOf intern lastIndexOf matches regionMatches replace replaceAll replaceFirst split startsWith subSequence substring toCharArray toLowerCase toUpperCase trim valueOf
+			selectDynamic updateDynamic applyDynamic applyDynamicNamed
+		}
+		
+		Globals {
+			this
+		}
+	}
+	
+	symbols {
+		Operators {+-*/%^~.,?!=&|:;}
+		Wrappers  {()[]{}}
+	}
+	
+	numbers {
+		Number {\y\d+(?:L|\.\d+[df]?)?\y}
+	}
+	
+	regexes {
+		Attribute {\@\w+}
+		Parameter {(?:[a-zA-Z_\$][\w\$]*)(?=\s*\:(?!\:))}
+	}
+	
+	strings {
+		Double-Quoted {(?s)(?:\y(?:s|raw|r|f))?".*?"}
+		Single-Quoted {'.*?'}
+		Backticks     {`.*?`}
+	}
+	
+	comments {
+		Comment {//.*}
+	}
+	
+	multi-line-comment {/\\* \\*/}
+}
+
+colors {
+	basic {
+		Default-Text DefaultText
+		Default-Background DefaultBackground
+		Default-Cursor DefaultCursor
+	}
+	
+	keywords {
+		Keywords Keyword1
+		Constants Keyword4
+		Types Constant2
+		Builtin-Functions Function1
+		Builtin-Methods Keyword3
+		Globals Keyword1
+	}
+	
+	symbols {
+		Operators Operator2
+		Wrappers Operator3
+	}
+	
+	numbers {
+		Number Number1
+	}
+	
+	regexes {
+		Attribute Keyword4
+		Parameter Keyword2
+	}
+	
+	strings {
+		Double-Quoted String1
+		Single-Quoted String1
+		Backticks     String2
+	}
+	
+	comments {
+		Comment Comment1
+	}
+	
+	multi-line-comment Comment1
+}

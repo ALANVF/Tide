@@ -1,4 +1,4 @@
-extensions {\\.tcl}
+extensions {.tcl}
 
 syntax {
 	keywords {
@@ -48,7 +48,7 @@ syntax {
 		Comment {(?=\n|\r|^|;)\s*#.*}
 	}
 	
-	multi-line-comment {\\( \\)}
+	multi-line-comment {^^\s*# \n}
 }
 
 colors {
@@ -84,6 +84,8 @@ colors {
 		Comment Comment1
 	}
 }
+
+
 
 
 
