@@ -39,13 +39,16 @@ syntax {
 	
 	regexes {
 		Flags {(?!\M)\-[\w\-]+}
-		String-Double-Quoted {".*?"}
-		String-Single-Quoted {'.*?'}
-		Variable-Prefix {(?!\\\\|\\)\$+(?:\:\:)?\w+(?:\:\:\w+)*}
+		Variable-Prefix {\$+(?:\:\:)?\w+(?:\:\:\w+)*}
+	}
+	
+	strings {
+		Double-Quoted {".*?"}
+		Single-Quoted {'.*?'}
 	}
 	
 	comments {
-		Comment {(?=\n|\r|^|;)\s*#.*}
+		Comment {(?=^|;)\s*#.*$}
 	}
 	
 	multi-line-comment {^^\s*# \n}
@@ -60,8 +63,8 @@ colors {
 	
 	keywords {
 		Keywords Keyword1
-		Word-Operators Operator1
 		Widgets Function1
+		Word-Operators Operator1
 	}
 	
 	symbols {
@@ -75,15 +78,26 @@ colors {
 	
 	regexes {
 		Flags Keyword4
-		String-Double-Quoted String1
-		String-Single-Quoted String1
 		Variable-Prefix Keyword2
+	}
+	
+	strings {
+		Double-Quoted String1
+		Single-Quoted String1
 	}
 	
 	comments {
 		Comment Comment1
 	}
 }
+
+
+
+
+
+
+
+
 
 
 

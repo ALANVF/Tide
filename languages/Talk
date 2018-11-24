@@ -3,7 +3,7 @@ extensions {.sm}
 syntax {
 	keywords {
 		Perl6-Keywords {
-			my has sub does for while else elsif die multi enum
+			my has sub does for while else elsif die multi enum use
 		}
 	
 		Expressions {
@@ -101,3 +101,4 @@ colors {
 	
 	multi-line-comment Comment1
 }
+

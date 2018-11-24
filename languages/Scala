@@ -81,7 +81,7 @@ syntax {
 	}
 	
 	strings {
-		Double-Quoted {(?s)(?:\y(?:s|raw|r|f))?".*?"}
+		Double-Quoted {".*?"}
 		Single-Quoted {'.*?'}
 		Backticks     {`.*?`}
 	}
@@ -135,3 +135,5 @@ colors {
 	
 	multi-line-comment Comment1
 }
+
+

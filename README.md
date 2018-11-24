@@ -1,15 +1,13 @@
 # Tide Code Editor
 ### A thing I've been working on for the past few months. I think it's pretty cool.
 
-## New Features (as of version 0.0.4):
-- Added auto-indenting (mostly).
-- Added a C++ lexer.
-- Added a Java lexer.
-- Added a Pascal lexer.
-- Added a Perl 6 lexer.
-- Added a Scala lexer.
-- File chooser actually acknowledges extensions listed in language files.
-- Fixed some weird bugs.
+## New Features (as of version 0.0.5):
+- Added Find and Replace search tools (fairly buggy).
+- Added One Dark theme.
+- Added Solarized Light theme.
+- Fixed some bugs with the auto-indentation.
+- Fixed a few bugs with saving files.
+- Made the default font better.
 
 ## Current Features:
 - Lexers for C, C++, Java, JavaScript, JSON, Lua, Pascal, Perl 6, Ruby (it's a bit broken fsr), Scala, Talk (my own programming language), Tcl, and normal text.
@@ -23,7 +21,7 @@
 - Font chooser.
 - In-app lexer/theme editor.
 - Macros.
-- Application extensions.
+- Plugins.
 
 ## Known Bugs (and very well know for that matter):
 - Files over, like, 20kb crash for some reason.

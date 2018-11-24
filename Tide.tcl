@@ -1,6 +1,8 @@
 package require Tk
 package require ctext
 
+font configure TkDefaultFont -family Arial -size 9
+
 proc rgb {r g b} {
 	return [format "#%02x%02x%02x" r g b]
 }
@@ -311,9 +313,18 @@ proc main {} {
 			}
 		}
 		.toolbar._file add command -label "Save File       (Ctrl+S)"    -command {
-			saveFile .f.t
+			if {$::fileName eq "Untitled"} {
+				set _newFile [tk_getSaveFile -filetypes $::fileTypes]
+				
+				if {$_newFile ne ""} {
+					set ::fileName $_newFile
+					saveFile .f.t
+				}
+			} else {
+				saveFile .f.t
+			}
 			
-			wm title . "Tide - $_fileName"
+			wm title . "Tide - $::fileName"
 		}
 		.toolbar._file add command -label "Save File As  (Ctrl+S)" -command {
 			set _newFile [tk_getSaveFile -filetypes $::fileTypes]
@@ -342,7 +353,14 @@ proc main {} {
 	
 	.toolbar add cascade -menu [menu .toolbar._view -tearoff 0]    -label View
 	.toolbar add cascade -menu [menu .toolbar._search -tearoff 0]  -label Search
+		.toolbar._search add command -label "Find..." -command {
+			eval [ftos [file normalize ./Find-text.tcl]]
+		}
+		.toolbar._search add command -label "Replace..." -command {
+			eval [ftos [file normalize ./Replace-text.tcl]]
+		}
 	.toolbar add cascade -menu [menu .toolbar._tools -tearoff 0]   -label Tools
+		.toolbar._tools add command -label "Plugins (coming soon)" -command {}
 	.toolbar add cascade -menu [menu .toolbar._options -tearoff 0] -label Options
 		.toolbar._options add command -label "Change Language" -command {
 			toplevel .setlang
@@ -557,9 +575,7 @@ proc main {} {
 	######ctext::addHighlightClassWithOnlyCharStart
 	
 	#.f.t fastinsert end [info body main]
-	pack [frame .f1] -fill x
 	.f.t highlight 1.0 end
-	pack [button .f1.exit -text Exit -command exit] -side left
 	
 	changeMode [dict get $::config language]
 	
@@ -601,6 +617,8 @@ proc main {} {
 }
 
 main
+
+
 
 
 
