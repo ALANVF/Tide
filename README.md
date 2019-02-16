@@ -23,7 +23,7 @@
 - Macros.
 - Plugins.
 
-## Known Bugs (and very well know for that matter):
+## Known Bugs (and very well known for that matter):
 - Files over, like, 20kb crash for some reason.
 - Some files under 20kb to a while to load, and may freeze the application for a few seconds.
 - Switching between lexers/themes constantly results in a file error that I have yet to find.
